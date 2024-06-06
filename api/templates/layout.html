@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/swiper.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/allblogs.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/anime.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar-header">
+        <div class="navbar-ham">
+            <div class="navbar">
+                <div class="container nav-container">
+                    <input class="checkbox" type="checkbox" name="" id="" />
+                    <div class="hamburger-lines">
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                    </div>
+                    <div class="menu-items">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">about</a></li>
+                        <li><a href="/articles/page/1">blogs</a></li>
+                        <li><a href="#">contact</a></li>
+                    </div>
+                </div>
+            </div>
+        <div class="profile">R</div>
+        </div>
+        <form action="/" class="form" method="post">
+            <div class="searchbarhome">
+                <input type="text" name="dotchainsearch" placeholder="Search">
+            </div>
+        </form>
+        <h1>.Chain</h1>
+    </nav>
+
+    {%block top%}
+    {%endblock%}
+    
+    <section class="top-categories">
+        <h3>Top Categories</h3>
+        <span><a href="/tech">Technology</a></span>
+        <span><a href="/genz">Gen-Z</a></span>
+        <span><a href="/gaming">Gaming</a></span>
+        <span><a href="/anime">Anime</a></span>
+    </section>
+  
+    <h3 style="margin:0px;padding:20px; background:white;">Latest News</h3>
+      <swiper-container class="mySwiper" pagination="false" navigation="false" effect="manipulation" grab-cursor="true" loop="true" centered-slides="true" slides-per-view="auto" coverflow-effect-rotate="0" coverflow-effect-stretch="0" coverflow-effect-depth="200" coverflow-effect-modifier="1" coverflow-effect-slide-shadows="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+        {% for i in index_news %}
+            <swiper-slide style="margin:0 20px 0 20px; background:url('{{i[3]}}') no-repeat; background-size: 100% 60%;border-radius:20px;">
+                <a href="{{i[1]}}" target="_blank">
+                    <div class="nsititle">
+                    <h3 class="nsi">{{i[0]}}</h3>
+                    <p class="nsi">{{i[2]}}</p>
+                    </div>
+                </a>
+            </swiper-slide>
+        {% endfor %}
+      </swiper-container>
+  <hr>
+  
+    {% block body %} 
+    {% endblock %}
+
+    <footer>
+        <div class="footer">
+            <div class="footup">
+                <div class="foot1">
+                    <h1>.Chain</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, similique.</p>
+                </div>
+                <div class="foot2">
+                    <h2>Topics</h2>
+                    <ul>
+                        <li><a href="/tech">Technology</a></li>
+                        <li><a href="/gaming">Gaming</a></li>
+                        <li><a href="/genz">Gen-Z</a></li>
+                        <li><a href="/Anime">Anime</a></li>
+                    </ul>
+                </div>
+                <div class="foot3">
+                    <h2>Help</h2>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="/policy">Policy</a></li>
+                        <li><a href="/terms_and_conditions">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="foot4">
+                    <h2>Information</h2>
+                    <p><strong>Operated by: </strong>1O8 Technologies </p>
+                    <p><strong>Address: </strong>India</p>
+                    <ul>
+                        <li class="social"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li class="social"><a href="#"><i class="fa fa-youtube"></i></a></li>
+                        <li class="social"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li class="social"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="footdown">
+                <img src="{{ url_for('static', filename='img/1O8logo.png') }}" loading="lazy" alt="">
+                <p><strong>&copy</strong> 2023 Copyrights By 1O8 Technologies. All rights reserved</p>
+            </div>
+        </div>
+
+    </footer>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+</body>
+
+</html>

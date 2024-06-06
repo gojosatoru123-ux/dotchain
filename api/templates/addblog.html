@@ -1,0 +1,54 @@
+{%extends "staffpanellayout.html"%}
+{%block body%}
+<h1>{{username}}</h1>
+<section id="addatricle">
+        <div class="form_heading"><h1>Add Articles</h1></div>
+        <form action="/staffpanel/{{username}}/add" method="post" id="addarticleform" enctype="multipart/form-data">
+            <div class="add_article">
+                <label for="article_id">ID</label>
+                <input type="text" name="article_id" id="article_id" placeholder="Article ID"  required/>
+            </div>
+            <div class="form-group">
+                <label for="title">TITLE</label>
+                <input type="text" name="title" id="title" placeholder="Title"  required/>
+            </div>
+            <div class="form-group">
+                <label for="keywords">KEYWORDS</label>
+                <input type="text" name="keywords" id="keywords" placeholder="keyword1,keyword2" required />
+            </div>
+            <div class="form-group">
+                <label for="image">IMAGE</label>
+                <input type="file" name="image" id="image" accept="image/*"  required/>
+            </div><!--accept is used to specify that only images accepted with gif and jpg datatype * means all-->
+            <div class="form-group">
+                <label for="description">DESCRIPTION</label>
+                <input type="text" name="description" id="description" placeholder="description"  required/>
+            </div>
+            <div class="form-group">
+                <label for="category">CATEGORY</label>
+                <select  name="category" id="category"   required/>
+                  <option value="Technology">Technology</option>
+                  <option value="Gen-Z">Gen-Z</option>
+                  <option value="Gaming">Gaming</option>
+                  <option value="Anime">Anime</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="objective">OBJECTIVE</label>
+                <select  name="objective" id="objective"   required/>
+                  <option value="commercial">Commercial</option>
+                  <option value="main">Main</option>
+                  <option value="homescreen">Homescreen</option>
+                  <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="main_content">CONTENT</i></label>
+                <textarea name="main_content" id="main_content" required ></textarea> 
+            </div>
+            <div class="form-group form-button">
+                <input type="submit" name="" id="" class="form-submit-button" value="Add" />
+            </div>
+        </form>
+    </section>
+{%endblock%}

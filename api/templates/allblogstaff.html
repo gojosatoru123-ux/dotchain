@@ -1,0 +1,66 @@
+{%extends "staffpanellayout.html" %}
+{%block body%}
+<h1>all blogs by you</h1>
+  <div>
+                          {% with messages=get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                              {% for category,message in messages %}
+                                <div style="color:red;"class='alert alert-{{category}}'>{{message}}</div>
+                              {% endfor %}
+                            {% endif %}
+                          {% endwith %}
+                        </div>
+<section class="bloginfo">
+  <form action="/staff/search/blog" method="post">
+                         <div class="search">
+                            <label>
+                                <input name ="search_blog_staff" type="text" placeholder="search blog" value="all">
+                            </label>
+                        </div>
+                       </form>
+  <div class="blogcard">
+    <div>
+        <div class="blognumbers">{{blogdatalen}}</div>
+        <div class="blogcardName">Blogs</div>
+    </div>
+
+    <div class="blogiconBx">
+        <i class="fa fa-book"></i>
+    </div>
+  </div>
+</section>
+
+<div class="container-staffblog">
+  {% for item in blogdata%}
+  <div class="mainblogcard">
+            <div class="card-staffblog">
+                <div class="card-header-staffblog">
+                    <img src="{{ url_for('serve_uploaded_image', filename=item[9]) }}" alt="" loading="lazy"/>
+                </div>
+                <div class="card-body-staffblog">
+                    <span class="tag-staffblog tag-pink-staffblog">{{item[4]}}</span>
+                    <span class="tag-staffblog tag-pink-staffblog">{{item[8]}}</span>
+                    <h4>
+                        {{item[1]}}
+                    </h4>
+                    <p>
+                        {{item[5]}}
+                      {{item[8]}}
+                    </p>
+                    <div class="user-staffblog">
+                        <div class="user-info-staffblog">
+                            <h5>{{item[6]}}</h5>
+                            <small>{{item[7]}}</small>
+                        </div>
+                    </div>
+                    <div class="cardbuttons">
+                      <a href="/article/{{item[0]}}"><button class="cardbuttonblog">Read</button></a>
+                      <a href="/blogupdate/{{username}}/{{item[0]}}"><button class="cardbuttonblog">Update</button></a>                      
+                    </div>
+                      
+                </div>
+            </div>
+        </div>
+     {%endfor%}   
+    </div>
+{%endblock%}

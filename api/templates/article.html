@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+  <meta name="description" content="{{blogdata[5]}}">
+  <meta name="keywords" content="{{blogdata[2]}}">
+  <meta name="author" content=".Chain by 1O8 {{blogdata[6]}}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:type" content="article"/>  
+  <meta property="og:title" content="{{blogdata[1]}}"/> 
+  <meta property="og:description" content="{{blogdata[5]}}"/> 
+  <meta property="og:image" content="{{ url_for('serve_uploaded_image', filename=blogdata[9]) }}" >  
+  <meta property="og:site_name" content=.chain>  
+  <title>{{blogdata[1]}}</title>
+  <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/article.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/swiper.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <nav class="navbar-header">
+        <div class="navbar-ham">
+            <div class="navbar">
+                <div class="container nav-container">
+                    <input class="checkbox" type="checkbox" name="" id="" />
+                    <div class="hamburger-lines">
+                        <span class="line line1"></span>
+                        <span class="line line2"></span>
+                        <span class="line line3"></span>
+                    </div>
+                    <div class="menu-items">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">about</a></li>
+                        <li><a href="/articles/page/1">blogs</a></li>
+                        <li><a href="#">contact</a></li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="profile">C</div>
+        <form action="/article/{{blogdata[0]}}" class="form" method="post">
+            <div class="searchbarhome">
+                <input type="text" name="dotchainsearch" placeholder="Search">
+            </div>
+        </form>
+        <h1>.Chain</h1>
+    </nav>
+  
+    <header class="articleheader" style="background: url({{ url_for('serve_uploaded_image', filename=blogdata[9]) }}) no-repeat fixed;background-size:cover;background-position: center;">
+          <h1 id="headerheading">{{blogdata[1]}}</h1>
+    </header>
+    
+    <section class="top-categories" id="top-categories">
+      <div id="infocard"> 
+        <h3>-{{blogdata[6]}}</h3>
+        <small>{{blogdata[7]}}</small>
+        <h4>{{blogdata[4]}}</h4>
+      </div>
+        <h3>Top Categories</h3>
+        <span><a href="/tech">Technology</a></span>
+        <span><a href="/genz">Gen-Z</a></span>
+        <span><a href="/gaming">Gaming</a></span>
+        <span><a href="/anime">Anime</a></span>
+    </section>
+    <main>
+      <section id="maincontent">
+        {{blogdata[3]| safe}} 
+      </section>
+    </main>
+  <section id="is3">
+  <div class="is3adv">
+    
+  </div>
+</section>
+  <section id="mainartrel">
+        <h2>Related</h2>
+        <div id="artreld1">
+            {%for i in rec_blogdata%}
+          <a href="/article/{{i[0]}}">
+            <div class="artreld">
+              <span class="category ardspan">{{i[2]}}</span>
+              
+              <h4><img src="{{ url_for('serve_uploaded_image', filename=i[3]) }}" loading="lazy">{{i[1]}}</h4>
+              <span class="date">{{i[4]}}</span>
+            </div>
+          </a>
+            {%endfor%}
+        </div>
+      </section>
+  
+
+    <footer>
+        <div class="footer">
+            <div class="footup">
+                <div class="foot1">
+                    <h1>.Chain</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, similique.</p>
+                </div>
+                <div class="foot2">
+                    <h2>Topics</h2>
+                    <ul>
+                        <li><a href="/tech">Technology</a></li>
+                        <li><a href="/gaming">Gaming</a></li>
+                        <li><a href="/genz">Gen-Z</a></li>
+                        <li><a href="/anime">Anime</a></li>
+                    </ul>
+                </div>
+                <div class="foot3">
+                    <h2>Help</h2>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="/policy">Policy</a></li>
+                        <li><a href="/terms_and_conditions">Terms and Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="foot4">
+                    <h2>Information</h2>
+                    <p><strong>Operated by: </strong>1O8 Technologies </p>
+                    <p><strong>Address: </strong>India</p>
+                    <ul>
+                        <li class="social"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li class="social"><a href="#"><i class="fa fa-youtube"></i></a></li>
+                        <li class="social"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li class="social"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="footdown">
+                <img src="{{ url_for('static', filename='img/1O8logo.png') }}" loading="lazy" alt="">
+                <p><strong>&copy</strong> 2023 Copyrights By 1O8 Technologies. All rights reserved</p>
+            </div>
+        </div>
+
+    </footer>
+    <script src="{{url_for('static',filename='js/article.js')}}"></script>
+</body>
+
+</html>

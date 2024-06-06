@@ -1,0 +1,112 @@
+{% extends 'layout.html'%}
+{%block top%}
+<section id="animesec1">
+<div id="animes1d1" style="background-image:url({{url_for('static',filename=headimage[0])}});"></div>
+<div id="animes1d2" style="background-image:url({{url_for('static',filename='img/splash.jpg')}});">
+  <h1>{{heading}}</h1>
+</div>
+</section>
+  {%endblock%}
+  {%block body%}
+<section id="animesec2">
+  <section id="animes2s1">
+    <img src="{{url_for('static',filename=headimage[1])}}" alt="" loading="lazy">
+  </section>
+</section>
+<section id="l2is2">
+    <div id="l2is2d1">
+      <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="false" space-between="30"
+    centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false" style="height:100%;width:400px;padding:0;">
+        {%for i in newsl%}
+    <swiper-slide style="height:100%;width:400px;">
+      <a href={{i[3]}} target="_blank">
+          <div id="l2is2d1d1">
+            <img src={{i[1]}} loading="lazy">
+            <div class="info">
+              <span class="category">News</span>
+              <span class="date">{{i[2]}}</span>
+              <h2>{{i[0]}}</h2>
+            </div>
+          </div>
+      </a>
+    </swiper-slide>
+        {%endfor%}
+  </swiper-container>
+    </div>
+    <div class="rod"></div>
+    <div id="l2is2d2">
+      {%for i in range(5)%}
+      <a href="/article/{{blog[i][0]}}">
+        <div class="is2d2d1">
+          <div class="is2d2c">
+            <span class="category">{{blog[i][2]}}</span>
+            <span class="date">{{blog[i][3]}}</span>
+            <h2>{{blog[i][1]}}</h2>
+          </div>
+          <img src="{{ url_for('serve_uploaded_image', filename=blog[i][4]) }}" loading="lazy">
+        </div>
+      </a>
+      <hr>
+      {%endfor%}
+    </div>
+    <div class="rod"></div>
+    <div id="l2is2d3">
+      <h3>STAY CONNECTED</h3>
+      <div id="is2d3d1">
+        <a href=""><div class="is2d3d1s">
+          <i class="fa fa-instagram"></i>
+          <h4>Instagram</h4>
+          <h4>544K+ Followers</h4>
+        </div></a>
+        <a href=""><div class="is2d3d1s">
+          <i class="fa fa-instagram"></i>
+          <h4>Instagram</h4>
+          <h4>544K+ Followers</h4>
+        </div></a>
+        <a href=""><div class="is2d3d1s">
+          <i class="fa fa-instagram"></i>
+          <h4>Instagram</h4>
+          <h4>544K+ Followers</h4>
+        </div></a>
+        <a href=""><div class="is2d3d1s">
+          <i class="fa fa-instagram"></i>
+          <h4>Instagram</h4>
+          <h4>544K+ Followers</h4>
+        </div></a>
+      </div>
+    </div>
+</section>
+<section id="animesec4">
+  <div class="angle one"   style="background-image: url(https://source.unsplash.com/1600x900/?gaming);"></div>
+  <div class="angle two"   style="background-image: url(https://source.unsplash.com/1600x901/?gaming);"></div>
+  <div class="angle three" style="background-image: url(https://source.unsplash.com/1600x902/?gaming);"></div>
+  <div class="angle four"  style="background-image: url(https://source.unsplash.com/1600x903/?gaming);"></div>
+  <div class="angle five"  style="background-image: url(https://source.unsplash.com/1600x904/?gaming);"></div>
+  <div class="angle six"   style="background-image: url(https://source.unsplash.com/1600x905/?gaming);"></div>
+</section>
+<section id="animesec3">
+  <a href="/article/{{blog[5][0]}}">
+    <div id="animes3d1">
+      <img src="{{ url_for('serve_uploaded_image', filename=blog[5][4]) }}" loading="lazy">
+      <h2>{{blog[5][1]}}</h2>
+      <span class="date">{{blog[5][3]}}</span>
+    </div>
+  </a>
+  {%for i in range(6,10)%}
+  <a href="/article/{{blog[i][0]}}"><div class="animes3d1">
+    <img src="{{ url_for('serve_uploaded_image', filename=blog[i][4]) }}" alt="" loading="lazy">
+    <h3>{{blog[i][1]}}</h3>
+    <span class="date">{{blog[i][3]}}</span>
+  </div></a>
+  {%endfor%}
+  <a href="/article/{{blog[10][0]}}">
+    <div id="animes3d2">
+      <img src="{{ url_for('serve_uploaded_image', filename=blog[10][4]) }}" loading="lazy">
+      <h2>{{blog[10][1]}}</h2>
+      <span class="date">{{blog[10][3]}}</span>
+    </div>
+  </a>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+<script src="{{url_for('static',filename='js/layout2.js')}}"></script>
+{%endblock%}

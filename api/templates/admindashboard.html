@@ -1,0 +1,301 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin {{username}}</title>
+    <!-- ======= Styles ====== -->
+    <link href="{{ url_for('static', filename='css/adminlayout.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <div class="a">
+                        <span class="title">.Chain</span>
+                    </div>
+                </li>
+
+                <li data-li="emptable" class="activedashboardtab">
+                    <div class="a">
+                        <span class="icon">
+                            <i class="fa fa-dashboard"></i>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </div>
+                </li>
+
+                <li data-li="allblogs">
+                    <div class="a">
+                        <span class="icon">
+                            <i class="fa fa-book"></i>
+                        </span>
+                        <span class="title">All Blogs</span>
+                    </div>
+                </li>
+
+                <li data-li="addemp">
+                    <div class="a">
+                        <span class="icon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <span class="title">Add staff</span>
+                    </div>
+                </li>
+
+                <li>
+                    <a href="/logout">
+                        <span class="icon">
+                            <i class="fa fa-sign-out"></i>
+                        </span>
+                        <span class="title">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ========================= Main ==================== -->
+        <div class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <i class="fa fa-bars"></i>
+                </div>
+
+                <form action="/admin/search/blog" method="post">
+                         <div class="search">
+                            <label>
+                                <input name ="search_blog" type="text" placeholder="search blog" value="all">
+                            </label>
+                        </div>
+                       </form>
+                <h3>JAI SHRI RAM</h3>
+            </div>
+
+            <!-- ======================= Cards ================== -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{totalemp}}</div>
+                        <div class="cardName">Staff</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <i class="fa fa-user"></i>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{blogdatalen}}</div>
+                        <div class="cardName">Blogs</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <i class="fa fa-book"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================ Order Details List ================= -->
+            <div class="details emptable admintabs">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Total employees</h2>
+                       <form action="/admin/search" method="post">
+                         <div class="search">
+                            <label>
+                                <input name ="search_emp" type="text" placeholder="search emp" value="all">
+                            </label>
+                        </div>
+                       </form>
+                        <div class='flashmessage pt-3'>
+                          {% with messages=get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                              {% for category,message in messages %}
+                                <div style="color:red;"class='alert alert-{{category}}'>{{message}}</div>
+                              {% endfor %}
+                            {% endif %}
+                          {% endwith %}
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Id</td>
+                                <td>Username</td>
+                                <td>Password</td>
+                                <td>Email</td>
+                                <td>Phone</td>
+                                <td>address</td>
+                                <td>Update</td>
+                                <td>Delete</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                          {% for item in userdata%}
+                            <tr>
+                                <td>{{item[0]}}</td>
+                                <td>{{item[1]}}</td>
+                                <td>{{item[2]}}</td>
+                                <td>{{item[3]}}</td>
+                                <td>{{item[4]}}</td>
+                                <td>{{item[5]}}</td>
+                                <td>
+                                  <a data-toggle="modal" data-target="#adminupdate{{item[0]}}"><button class="btn" onclick="openForm(event)" data-form-id="adminupdate{{item[0]}}">Update<i class="fa fa-refresh"></i></button></a>
+                                </td>      
+                              <section id="adminupdate{{item[0]}}"class="sign-in adminupdate">
+                    <div class="containeraddemp modal">
+                        <div id="update-sigin-content"class="signin-content">
+                            <div id="update-sigin-form"class="signin-form update-signin-form" style="width:90%;margin:20px;">
+                                <h1 class="form-title">.Chain</h1>
+                                <h2 class="form-title">update Staff</h2>
+                                <form action="/updatestaff/{{item[0]}}" method="POST" class="register-form" id="update-form">
+                                    <div class="form-group">
+                                        <label for="your_id"><i class="fa fa-user"></i></label>
+                                        <input type="text" name="staff_update_id" id="staff_update_id" placeholder="Id" value={{item[0]}} required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="your_name"><i class="fa fa-user"></i></label>
+                                        <input type="text" name="staff_update_username" id="staff_update_username" placeholder="Username" value={{item[1]}} required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="your_pass"><i class="fa fa-lock"></i></label>
+                                        <input type="password" name="staff_update_pass" id="staff_update_pass" placeholder="Password" value={{item[2]}} required />
+                                    </div>
+                                  <div class="form-group">
+                                        <label for="your_email"><i class="fa fa-envelope"></i></label>
+                                        <input type="email" name="staff_update_email" id="staff_update_email" placeholder="email" value={{item[3]}} required/>
+                                    </div>
+                                  <div class="form-group">
+                                        <label for="your_phonenumber"><i class="fa fa-phone"></i></label>
+                                        <input type="tel" name="staff_update_phone" id="staff_update_phone" placeholder="Phone number" value={{item[4]}} required/>
+                                    </div>
+                                  <div class="form-group">
+                                        <label for="your_address"><i class="fa fa-address-card"></i></label>
+                                        <input type="text" name="staff_update_address" id="staff_update_address" placeholder="Address"value={{item[5]}} required />
+                                    </div>
+                                    <div class="form-group form-button">
+                                        <input type="submit" name="update" id="update" class="form-submit" value="update" />
+                                        <button type="button" id="updatecancelbuttonadmin"class="form-submit" onclick="closeForm(event)" data-form-id="adminupdate{{item[0]}}">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                                <td>
+                                  <a href="/deletestaff/{{item[0]}}">
+                                    <button class="btn" onclick="return confirm('are you sure you want to delete?')">Delete<i class="fa fa-remove"></i></button>
+                                  </a>
+                                </td>
+                            </tr>
+                          {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- ================ all blogs ================= -->
+            <div class="allblogs admintabs"style="display: none;">
+              <div class="container-staffblog">
+  {% for item in blogdata%}
+  <div class="mainblogcard">
+            <div class="card-staffblog">
+                <div class="card-header-staffblog">
+                    <img src="{{ url_for('serve_uploaded_image', filename=item[9]) }}" loading="lazy" alt="" />
+                </div>
+                <div class="card-body-staffblog">
+                  <div style="display:flex;flex-wrap:wrap;">
+                    <span class="tag-staffblog tag-pink-staffblog">{{item[0]}}</span>
+                    <span class="tag-staffblog tag-pink-staffblog">{{item[4]}}</span>
+                    <span class="tag-staffblog tag-pink-staffblog">{{item[8]}}</span>
+                    <span class="tag-staffblog tag-pink-staffblog">{{item[10]}}</span>
+                  </div>
+                    <h4>
+                        {{item[1]}}
+                    </h4>
+                    <p>
+                        {{item[5]}}
+                      {{item[8]}}
+                    </p>
+                    <div class="user-staffblog">
+                        <div class="user-info-staffblog">
+                            <h5>{{item[6]}}</h5>
+                            <small>{{item[7]}}</small><br>
+                           <small style="margin:10px; background:yellow;">{{item[2]}}</small>
+                        </div>
+                    </div>
+                    <div class="cardbuttons">
+                      <a href="/article/{{item[0]}}"><button class="btn">Read</button></a>
+                      <a href="/deleteblog/{{item[0]}}"><button onclick="return confirm('are you sure you want to delete?')" class="btn">Delete</button></a> 
+                       <a href="/blogupdate/{{username}}/{{item[0]}}" target="_blank"><button class="btn">Update</button></a>
+                    </div>
+                      
+                </div>
+            </div>
+        </div>
+     {%endfor%}   
+    </div>
+            </div>
+            <!-- ================ add emp ================= -->
+            <div class="addemp admintabs"style="display: none;">
+                <section class="sign-in">
+                    <div class="containeraddemp">
+                        <div class="signin-content">
+                            <div class="signin-image">
+                                <figure><img src="{{url_for('static',filename='img/signup-image.jpg')}}" loading="lazy"  alt="sing up image"></figure>
+                            </div>
+                            <div class="signin-form">
+                                <h1 class="form-title">.Chain</h1>
+                                <h2 class="form-title">Add Staff</h2>
+                                <form action="/admin/{{username}}" method="POST" class="register-form" id="login-form">
+                                    <div class="form-group">
+                                        <label for="your_id"><i class="fa fa-user"></i></label>
+                                        <input type="text" name="staff_id" id="staff_id" placeholder="Id" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="your_name"><i class="fa fa-user"></i></label>
+                                        <input type="text" name="staff_username" id="staff_username" placeholder="Username" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="your_pass"><i class="fa fa-lock"></i></label>
+                                        <input type="password" name="staff_pass" id="staff_pass" placeholder="Password" required />
+                                    </div>
+                                  <div class="form-group">
+                                        <label for="your_email"><i class="fa fa-envelope"></i></label>
+                                        <input type="email" name="staff_email" id="staff_email" placeholder="email"  required/>
+                                    </div>
+                                  <div class="form-group">
+                                        <label for="your_phonenumber"><i class="fa fa-phone"></i></label>
+                                        <input type="tel" name="staff_phone" id="staff_phone" placeholder="Phone number"  required/>
+                                    </div>
+                                  <div class="form-group">
+                                        <label for="your_address"><i class="fa fa-address-card"></i></label>
+                                        <input type="text" name="staff_address" id="staff_address" placeholder="Address" required />
+                                    </div>
+                                    <div class="form-group form-button">
+                                        <input type="submit" name="signin" id="signin" class="form-submit" value="Add" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+        <!-- =========== Scripts =========  -->
+  <script src="{{url_for('static', filename='js/adminlayout.js')}}"></script>
+  <script src="{{url_for('static', filename='js/admintabs.js')}}"></script>
+  <script src="{{url_for('static', filename='js/admindeleteupdate.js')}}"></script>
+  
+</body>
+
+</html>

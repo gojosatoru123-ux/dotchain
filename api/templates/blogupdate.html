@@ -1,0 +1,60 @@
+{%extends "staffpanellayout.html"%}
+{%block body%}
+<section id="addatricle">
+        <div class="form_heading"><h1>update Articles</h1></div>
+        <form action="/blogupdate/{{username}}/{{blogdata[0]}}" method="post" id="addarticleform" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="title">TITLE</label>
+                <input type="text" name="title" id="title" placeholder="Title" value="{{blogdata[1]}}" required/>
+            </div>
+            <div class="form-group">
+                <label for="keywords">KEYWORDS</label>
+                <input type="text" name="keywords" id="keywords" placeholder="keyword1,keyword2" value="{{blogdata[2]}}" required />
+            </div>
+            <div class="form-group">
+                <label for="image">IMAGE</label>
+                <input type="file" name="image" id="image" accept="image/*" />
+                <span style="font-weight:bolder;font-size:20px;color:red;">old file:-{{blogdata[9]}}</span>
+            </div><!--accept is used to specify that only images are accepted with gif and jpg datatype * means all-->
+          <div class="form-group">
+                <label for="description">DESCRIPTION</label>
+                <input type="text" name="description" id="description" placeholder="description"  value="{{blogdata[5]}}" required/>
+            </div>
+          <div class="form-group">
+                <label for="category">CATEGORY</label>
+                <select  name="category" id="category" value={{blogdata[4]}}  required/>
+                  {% for option in categories %}
+                {% if option == blogdata[4] %}
+                    <option value="{{ option }}" selected>{{ option }}</option>
+                {% else %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endif %}
+            {% endfor %}
+                </select>
+            </div>
+          <div class="form-group">
+                <label for="objective">OBJECTIVE</label>
+                <select  name="objective" id="objective"  value={{blogdata[8]}} required/>
+                  {% for option in objectives %}
+                {% if option == blogdata[8] %}
+                    <option value="{{ option }}" selected>{{ option }}</option>
+                {% else %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endif %}
+            {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="main_content">CONTENT</i></label>
+                <textarea name="main_content" id="main_content" required>{{blogdata[3]}}</textarea> 
+            </div>
+          <div class="form-group">
+                <label for="code">UPDATE CODE</label>
+                <input type="number" name="code" id="code" placeholder="ask the admin for the update code of this article"  required/>
+            </div>
+            <div class="form-group form-button">
+                <input type="submit" name="" id="" class="form-submit-button" value="Update" />
+            </div>
+        </form>
+    </section>
+{%endblock%}

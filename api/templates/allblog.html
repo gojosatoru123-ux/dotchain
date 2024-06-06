@@ -1,0 +1,40 @@
+{%extends "layout.html"%}
+{%block body%}
+<section id="als1">
+<div class="abadsd1">
+  <div class="abadsd1d1">
+  </div>
+</div>
+{%for item in blogdata%}
+<a href="/article/{{item[0]}}">
+        <div class="alcard">
+            <div class="alcardd1">
+                <div class="alcardd1d2"></div>
+                <h4>{{item[1]}}</h4>
+                <span class="category">{{item[2]}}</span>
+                <span class="date">{{item[4]}}</span>
+            </div>
+            <div class="alcardd2">
+                <img src="{{ url_for('serve_uploaded_image', filename=item[5]) }}"
+                    alt="" loading="lazy">
+                <p>{{item[3][0:100]}}...</p>
+            </div>
+        </div>
+</a>
+{%endfor%}
+<div class="abadsd1">
+  <div class="abadsd1d1">
+  </div>
+</div>
+</section>
+<section id="als2">
+  <div class='example'>
+      <div class='text'><a href="{{prev}}">previous article</a></div>
+      <div class='counter'>
+          <span class='number'>{{pageno}}</span>
+          <div class='background'></div>
+      </div>
+      <div class='text'><a href="{{next}}">next article</a></div>
+  </div>
+</section>
+{%endblock%}
